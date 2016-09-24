@@ -1,0 +1,10 @@
+BrainEngine_v0.0.1
+
+# WebCrawler Engine :
+    1. Get all web page content.
+    2. Save all web page content in Repo.
+
+# DataProcessor Engine :
+    1. Get all page content from Repo.
+    2. Get all links from page content.
+    3. Save all links in links table.
