@@ -30,11 +30,21 @@ def getLinksFromPageContent(url,page_content):
     soup = BeautifulSoup(page_content, "html.parser")
     links = []
     for link in soup.findAll('a'):
-        links.append(url + str(link.get('href')))
+        link = str(link.get('href'))
+        #if url not in link:
+        links.append(link)
     return links
 
+# Clean content links
 def cleanLinks(url,content_links):
-    print(content_links)
+    links = []
+    for link in content_links:
+        if link is '#':
+            content_links.remove(link)    # Remove all #
+        if '//' not in link:
+            links.append(url + link)      # IF link does not has // then add main url
+
+    return links
 
 # Save page content links in links table
 def saveContentLinksInDb(link_id,content_links):
