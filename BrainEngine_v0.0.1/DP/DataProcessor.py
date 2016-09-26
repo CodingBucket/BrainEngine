@@ -5,10 +5,17 @@ import sys
 
 # Start point of DataProcessor
 def startDataProcessor():
+
     link_id = 1
+
     url = 'http://stackoverflow.com'
+
     page_content = getPageContentFromRepo()
+
     content_links = getLinksFromPageContent(url,page_content)
+
+    content_links = cleanLinks(url,content_links)
+
     saveContentLinksInDb(link_id,content_links)
 
 # Get all page content from the Repo
@@ -26,29 +33,28 @@ def getLinksFromPageContent(url,page_content):
         links.append(url + str(link.get('href')))
     return links
 
+def cleanLinks(url,content_links):
+    print(content_links)
+
 # Save page content links in links table
 def saveContentLinksInDb(link_id,content_links):
 
-    print(content_links)
     #sys.exit()
+    db = pymysql.connect("localhost", "root", "", "be_1")  # Start Db connection
 
-    db = pymysql.connect("localhost", "root", "", "be_1")
-    cursor = db.cursor()
+    for link in content_links:
+        cursor = db.cursor()
+        sql = " INSERT INTO links(link) \
+                VALUES ('%s')" % \
+                (link)
+        try:
+            cursor.execute(sql)   # Execute the SQL command
+            db.commit()           # Commit your changes in the database
+        except:
+            db.rollback()         # Rollback in case there is any error
 
-    sql = " INSERT INTO links(link) \
-            VALUES ('%s')" % \
-            ('Mac 123')
+    db.close()                    # Close Db connection
 
-    try:
-        cursor.execute(sql)   # Execute the SQL command
-        db.commit()           # Commit your changes in the database
-    except:
-        db.rollback()         # Rollback in case there is any error
-
-    db.close()
-
-saveContentLinksInDb(1,1)
-
-#startDataProcessor()
+startDataProcessor()
 
 
