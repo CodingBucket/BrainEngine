@@ -30,26 +30,25 @@ def getLinksFromPageContent(url,page_content):
 def saveContentLinksInDb(link_id,content_links):
 
     print(content_links)
-    sys.exit()
+    #sys.exit()
 
-    db = pymysql.connect("localhost", "root", "", "test")
-
-    # prepare a cursor object using cursor() method
+    db = pymysql.connect("localhost", "root", "", "be_1")
     cursor = db.cursor()
 
-    cursor.execute("DROP TABLE IF EXISTS EMPLOYEE")
+    sql = " INSERT INTO links(link) \
+            VALUES ('%s')" % \
+            ('Mac 123')
 
-    sql = """CREATE TABLE EMPLOYEE (
-             FIRST_NAME CHAR(20) NOT NULL,
-             LAST_NAME CHAR(20),
-             AGE INT,
-              SEX CHAR(1),
-             INCOME FLOAT )"""
-    cursor.execute(sql)
+    try:
+        cursor.execute(sql)   # Execute the SQL command
+        db.commit()           # Commit your changes in the database
+    except:
+        db.rollback()         # Rollback in case there is any error
 
-    # disconnect from server
     db.close()
 
-startDataProcessor()
+saveContentLinksInDb(1,1)
+
+#startDataProcessor()
 
 

@@ -8,3 +8,6 @@ BrainEngine_v0.0.1
     1. Get all page content from Repo.
     2. Get all links from page content.
     3. Save all links in links table.
+
+# DataBase
+  links Table : link_id, link
