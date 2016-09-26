@@ -1,5 +1,7 @@
 # DataProcessor Engine
 from bs4 import BeautifulSoup
+import pymysql
+import sys
 
 # Start point of DataProcessor
 def startDataProcessor():
@@ -26,7 +28,27 @@ def getLinksFromPageContent(url,page_content):
 
 # Save page content links in links table
 def saveContentLinksInDb(link_id,content_links):
+
     print(content_links)
+    sys.exit()
+
+    db = pymysql.connect("localhost", "root", "", "test")
+
+    # prepare a cursor object using cursor() method
+    cursor = db.cursor()
+
+    cursor.execute("DROP TABLE IF EXISTS EMPLOYEE")
+
+    sql = """CREATE TABLE EMPLOYEE (
+             FIRST_NAME CHAR(20) NOT NULL,
+             LAST_NAME CHAR(20),
+             AGE INT,
+              SEX CHAR(1),
+             INCOME FLOAT )"""
+    cursor.execute(sql)
+
+    # disconnect from server
+    db.close()
 
 startDataProcessor()
 
