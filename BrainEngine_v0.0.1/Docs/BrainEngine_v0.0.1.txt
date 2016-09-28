@@ -11,7 +11,8 @@ BrainEngine_v0.0.1
     4. Save all links in links table.[Done]
 
     1. Process page data.
-    2. Save page data in db index.
+    2. Save page data in pages Table.
+    3. Save page keyword in keywords Table.
 
 # DataBase
   1. links Table : link_id(int), page_id(int), link(text)
