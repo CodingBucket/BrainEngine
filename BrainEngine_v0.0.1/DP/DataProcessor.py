@@ -6,7 +6,6 @@ import pymysql
 import sys
 
 
-
 # Start point of DataProcessor
 def startDataProcessor():
 
@@ -37,8 +36,7 @@ def getLinksFromPageContent(url,page_content):
     links = []
     for link in soup.findAll('a'):
         link = str(link.get('href'))
-        #if url not in link:
-        links.append(link)
+        links.append(link) #if url not in link:
     return links
 
 # Clean content links
@@ -105,13 +103,18 @@ def processPageContent(html):
     # Get all words that need to remove
     remove_word = RemoveWords.getRemoveWord()
 
-    for d in all_text:
-        if d.isnumeric() is True:  # Remove all number from page content text array
-            all_text.remove(d)
-        if d in remove_word:       # Remove all unnecery words
-            all_text.remove(d)
+    only_str = []
 
-    print ("\n".join(all_text))
+    for d in all_text:                        # Iterate all doc.
+        if len(d) > 1:                        # IF doc length is greater than 1
+            if d.isalnum() is True:           # IF doc is alfanumeric.
+                if d.isdigit() is not True:   # IF doc is not a number.
+                    if d not in remove_word:  # IF doc is not a removed word.
+                        only_str.append(d)    # Then make the clean doc array.
+
+
+    #print(all_text1)
+    print ("\n".join(only_str))
 
 
 
