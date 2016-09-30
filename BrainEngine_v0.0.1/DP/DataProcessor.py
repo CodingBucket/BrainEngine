@@ -18,7 +18,7 @@ def startDataProcessor():
 
     #saveContentLinksInDb(link_id,content_links)
 
-    all_text = getAllTextFromPageContent(page_content)
+    all_text = processPageContent(page_content)
 
 # Get all page content from the Repo
 def getPageContentFromRepo():
@@ -67,7 +67,9 @@ def saveContentLinksInDb(link_id,content_links):
 
     db.close()                    # Close Db connection
 
-def getAllTextFromPageContent(html):
+# Return all text from the page content
+def processPageContent(html):
+
     soup = BeautifulSoup(html,"html.parser") # create a new bs4 object from the html data loaded
     for script in soup(["script", "style"]): # remove all javascript and stylesheet code
         script.extract()
@@ -84,8 +86,28 @@ def getAllTextFromPageContent(html):
     # drop blank lines
     all_text = '\n'.join(chunk for chunk in chunks if chunk)
 
-    print(all_text)
-    #return all_text
+    # Make all string lowercase
+    all_text = all_text.lower()
+
+    # Replace all \n with space
+    all_text = all_text.replace('\n', ' ')
+
+    # Replace all dot
+    all_text = all_text.replace('.', '')
+
+    # Make array from page content string
+    all_text = all_text.split(' ')
+
+    remove_word = ['+','a','an','and','of','on','your','up','or','in','into','the','to','any','you','us','is','this','that']
+
+    for d in all_text:
+        if d.isnumeric() is True:  # Remove all number from page content text array
+            all_text.remove(d)
+        if d in remove_word:       # Remove all unnecery words
+            all_text.remove(d)
+
+    print ("\n".join(all_text))
+
 
 startDataProcessor()
 
