@@ -1,7 +1,11 @@
 # DataProcessor Engine
+import DP.RemoveWords as RemoveWords
+
 from bs4 import BeautifulSoup
 import pymysql
 import sys
+
+
 
 # Start point of DataProcessor
 def startDataProcessor():
@@ -98,7 +102,8 @@ def processPageContent(html):
     # Make array from page content string
     all_text = all_text.split(' ')
 
-    remove_word = ['+','a','an','and','of','on','your','up','or','in','into','the','to','any','you','us','is','this','that']
+    # Get all words that need to remove
+    remove_word = RemoveWords.getRemoveWord()
 
     for d in all_text:
         if d.isnumeric() is True:  # Remove all number from page content text array
@@ -107,6 +112,9 @@ def processPageContent(html):
             all_text.remove(d)
 
     print ("\n".join(all_text))
+
+
+
 
 
 startDataProcessor()
