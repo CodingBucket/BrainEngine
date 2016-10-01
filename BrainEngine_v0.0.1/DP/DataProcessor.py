@@ -16,19 +16,19 @@ def startDataProcessor():
 
    link_id = 1
 
-   url = 'http://stackoverflow.com'
+   page_link = 'http://stackoverflow.com'
 
    page_content = getPageContentFromRepo()
 
-   #content_links = getLinksFromPageContent(url,page_content)
+   #content_links = getLinksFromPageContent(page_link,page_content)
 
-   #content_links = cleanLinks(url,content_links)
+   #content_links = cleanLinks(page_link,content_links)
 
    #saveContentLinksInDb(link_id,content_links)
 
-   page_content = processPageContent(url,page_content)
+   page_content = processPageContent(page_link,page_content)
 
-   savePageContent(url,page_content)
+   savePageContent(page_link,page_content)
 
 ''' @Task: Get all page content from the Repo '''
 def getPageContentFromRepo():
@@ -38,7 +38,7 @@ def getPageContentFromRepo():
   return page_content
 
 ''' @Task: Get all links from page content '''
-def getLinksFromPageContent(url,page_content):
+def getLinksFromPageContent(page_link,page_content):
   soup = BeautifulSoup(page_content, "html.parser")
   links = []
   for link in soup.findAll('a'):
@@ -76,7 +76,7 @@ def saveContentLinksInDb(link_id,content_links):
    db.close()                    # Close Db connection
 
 ''' @Task: Return all text from the page content '''
-def processPageContent(url, page_html):
+def processPageContent(page_link, page_html):
 
     page_content = {}
 

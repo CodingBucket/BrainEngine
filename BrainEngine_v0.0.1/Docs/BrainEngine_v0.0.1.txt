@@ -5,9 +5,13 @@ Programming Language: Python v3.5
 Project StartDate   : 24.09.2016
 Version StartDate   : 24.09.2016
 
+------------------------------------------------------------------------------------------------------------------------
+
 # WebCrawler Engine :
     1. Get all web page content. [Done]
     2. Save all web page content in Repo. [Done]
+
+------------------------------------------------------------------------------------------------------------------------
 
 # DataProcessor Engine :
     1. Get all page content from Repo.[Done]
@@ -23,14 +27,17 @@ Version StartDate   : 24.09.2016
 
         a. Get page link, title, full_content [30.09.16]
 
-    2. Save page data in pages Table.
-    3. Save page keyword in keywords Table.
+    2. Save page content in pages Table. [30.09.16]
+    3. Save page doc in page_doc Table.
+
+------------------------------------------------------------------------------------------------------------------------
 
 # DataBase
-  1. links Table : link_id(pk.int), page_id(int), link(text)
+  1. links Table : link_id(PK.INT), page_id(INT), link(TEXT)
 
-  2. pages Table : page_id(pk.int), page_link(text), page_title(text), page_keyword(text), page_description(text),
-                   page_full_content(text), num_of_links(int)
+  2. pages Table : page_id(PK.int), page_link(TEXT), page_title(TEXT), page_keyword(TEXT), page_description(TEXT),
+                   page_full_content(LONGTEXT), num_of_links(INT)
 
-  3. page_docs Table : doc_id(pk.int), doc(text), page_doc_count(text) {1:2,2:3,3:6} [page_id:doc_count]
+  3. page_docs Table : doc_id(PK.INK), doc(TEXT), page_doc_count(LONGTEXT) {1:2,2:3,3:6} [page_id:doc_count]
 
+------------------------------------------------------------------------------------------------------------------------
