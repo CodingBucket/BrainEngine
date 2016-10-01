@@ -1,9 +1,9 @@
 BrainEngine_v0.0.1
-Project Name      : BrainEngine
-Project Version   : 0.0.1
-Project Language  : Python v3.5
-Project StartDate : 24.09.2016
-Version StartDate : 24.09.2016
+Project Name        : BrainEngine
+Project Version     : 0.0.1
+Programming Language: Python v3.5
+Project StartDate   : 24.09.2016
+Version StartDate   : 24.09.2016
 
 # WebCrawler Engine :
     1. Get all web page content. [Done]
@@ -16,12 +16,12 @@ Version StartDate : 24.09.2016
     4. Save all links in links table.[Done]
 
     1. Process page data.
-        a. Remove all number [Done]
-        b. Remove 1 length string [Done]
-        c. Remove remove_words [Done]
-        d. Remove non alfanumeric string [Done]
+        a. Remove all number [30.09.16]
+        b. Remove 1 length string [30.09.16]
+        c. Remove remove_words [30.09.16]
+        d. Remove non alfanumeric string [30.09.16]
 
-        a. Get page link, title, description, keyword, full_content
+        a. Get page link, title, full_content [30.09.16]
 
     2. Save page data in pages Table.
     3. Save page keyword in keywords Table.

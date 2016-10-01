@@ -4,72 +4,79 @@ import DP.RemoveWords as RemoveWords
 from bs4 import BeautifulSoup
 import pymysql
 import sys
+import json
 
+''' DataBase Variables '''
+db_host = 'localhost'
+db_username = 'root'
+db_pass = ''
+db_name = 'be_1'
 
-# Start point of DataProcessor
+''' @Task: Start point of DataProcessor '''
 def startDataProcessor():
 
-    link_id = 1
+   link_id = 1
 
-    url = 'http://stackoverflow.com'
+   url = 'http://stackoverflow.com'
 
-    page_content = getPageContentFromRepo()
+   page_content = getPageContentFromRepo()
 
-    #content_links = getLinksFromPageContent(url,page_content)
+   #content_links = getLinksFromPageContent(url,page_content)
 
-    #content_links = cleanLinks(url,content_links)
+   #content_links = cleanLinks(url,content_links)
 
-    #saveContentLinksInDb(link_id,content_links)
+   #saveContentLinksInDb(link_id,content_links)
 
-    all_text = processPageContent(url,page_content)
+   page_content = processPageContent(url,page_content)
 
-# Get all page content from the Repo
+   savePageContent(url,page_content)
+
+''' @Task: Get all page content from the Repo '''
 def getPageContentFromRepo():
-    fr = open('1.html', 'r')
-    page_content = fr.read()
-    fr.close()
-    return page_content
+  fr = open('1.html', 'r')
+  page_content = fr.read()
+  fr.close()
+  return page_content
 
-# Get all links from page content
+''' @Task: Get all links from page content '''
 def getLinksFromPageContent(url,page_content):
-    soup = BeautifulSoup(page_content, "html.parser")
-    links = []
-    for link in soup.findAll('a'):
-        link = str(link.get('href'))
-        links.append(link) #if url not in link:
-    return links
+  soup = BeautifulSoup(page_content, "html.parser")
+  links = []
+  for link in soup.findAll('a'):
+      link = str(link.get('href'))
+      links.append(link) #if url not in link:
+  return links
 
-# Clean content links
+''' @Task: Clean content links '''
 def cleanLinks(url,content_links):
-    links = []
-    for link in content_links:
-        if link is '#':
-            content_links.remove(link)    # Remove all #
-        if '//' not in link:
-            links.append(url + link)      # IF link does not has // then add main url
+  links = []
+  for link in content_links:
+      if link is '#':
+          content_links.remove(link)    # Remove all #
+      if '//' not in link:
+          links.append(url + link)      # IF link does not has // then add main url
 
-    return links
+  return links
 
-# Save page content links in links table
+''' @Task: Save page content links in links table '''
 def saveContentLinksInDb(link_id,content_links):
 
-    #sys.exit()
-    db = pymysql.connect("localhost", "root", "", "be_1")  # Start Db connection
+   db = pymysql.connect(db_host, db_username, db_pass, db_name)  # Start Db connection
 
-    for link in content_links:
-        cursor = db.cursor()
-        sql = " INSERT INTO links(link) \
-                VALUES ('%s')" % \
-                (link)
-        try:
-            cursor.execute(sql)   # Execute the SQL command
-            db.commit()           # Commit your changes in the database
-        except:
-            db.rollback()         # Rollback in case there is any error
+   for link in content_links:
+       cursor = db.cursor()
+       sql = " INSERT INTO links(link) \
+               VALUES ('%s')" % \
+               (link)
+       try:
+           cursor.execute(sql)   # Execute the SQL command
+           db.commit()           # Commit your changes in the database
+       except:
+           db.rollback()         # Rollback in case there is any error
 
-    db.close()                    # Close Db connection
+   db.close()                    # Close Db connection
 
-# Return all text from the page content
+''' @Task: Return all text from the page content '''
 def processPageContent(url, page_html):
 
     page_content = {}
@@ -78,7 +85,7 @@ def processPageContent(url, page_html):
 
     soup = removeAllScriptsFromPageContent(page_html_soup)
 
-    page_content['page_title'] = getPageTitle()  # Get page title from the page title.
+    page_content['page_title'] = getPageTitle(soup)  # Get page title from the page title.
 
     text = soup.get_text()  # get all text
 
@@ -103,9 +110,11 @@ def processPageContent(url, page_html):
                     if d not in remove_word:  # IF doc is not a removed word.
                         only_str.append(d)    # Then make the clean doc array.
 
-    print ("\n".join(only_str))
+    page_content['page_full_content'] = only_str
+    return page_content
+    #print ("\n".join(only_str))
 
-''' @Task: Return page title from page html soup obj. '''
+''' @Task: Return page title From page html soup obj and Return page title. '''
 def getPageTitle(soup):
     page_title = soup.title.string
     return page_title
@@ -120,6 +129,27 @@ def removeAllScriptsFromPageContent(page_html_soup):
     for script in page_html_soup(["script", "style"]): # remove all javascript and stylesheet code
         script.extract()
     return page_html_soup
+
+''' @Task: Save page content in pages Table. '''
+def savePageContent(url,page_content):
+    print (page_content)
+    page_full_content = page_content['page_full_content']
+    full_content = json.loads(page_full_content)
+    print(full_content)
+    sys.exit()
+    db = pymysql.connect(db_host, db_username, db_pass, db_name)  # Start Db connection
+
+    cursor = db.cursor()
+    sql = " INSERT INTO pages(page_link, page_title) \
+            VALUES ('%s')" % \
+          ('')
+    try:
+        cursor.execute(sql)  # Execute the SQL command
+        db.commit()  # Commit your changes in the database
+    except:
+        db.rollback()  # Rollback in case there is any error
+
+    db.close()  # Close Db connection
 
 startDataProcessor()
 
