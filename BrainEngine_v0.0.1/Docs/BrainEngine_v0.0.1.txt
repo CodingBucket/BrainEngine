@@ -27,10 +27,10 @@ Version StartDate   : 24.09.2016
     3. Save page keyword in keywords Table.
 
 # DataBase
-  1. links Table : link_id(int), page_id(int), link(text)
+  1. links Table : link_id(pk.int), page_id(int), link(text)
 
-  2. pages Table : page_id(int), page_link(text), page_title(text), page_keyword(text), page_description(text),
-                   full_content(text), num_of_links(int)
+  2. pages Table : page_id(pk.int), page_link(text), page_title(text), page_keyword(text), page_description(text),
+                   page_full_content(text), num_of_links(int)
 
-  3. page_docs Table : doc_id(int), doc(text), page_doc_count(text) {1:2,2:3,3:6} [page_id:doc_count]
+  3. page_docs Table : doc_id(pk.int), doc(text), page_doc_count(text) {1:2,2:3,3:6} [page_id:doc_count]
 

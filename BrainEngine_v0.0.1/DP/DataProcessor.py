@@ -4,7 +4,6 @@ import DP.RemoveWords as RemoveWords
 from bs4 import BeautifulSoup
 import pymysql
 import sys
-import json
 
 ''' DataBase Variables '''
 db_host = 'localhost'
@@ -131,25 +130,23 @@ def removeAllScriptsFromPageContent(page_html_soup):
     return page_html_soup
 
 ''' @Task: Save page content in pages Table. '''
-def savePageContent(url,page_content):
-    print (page_content)
-    page_full_content = page_content['page_full_content']
-    full_content = json.loads(page_full_content)
-    print(full_content)
-    sys.exit()
+def savePageContent(page_link,page_content):
+
+    page_title = page_content['page_title']
+    page_full_content = ':'.join(page_content['page_full_content'])
     db = pymysql.connect(db_host, db_username, db_pass, db_name)  # Start Db connection
 
     cursor = db.cursor()
-    sql = " INSERT INTO pages(page_link, page_title) \
-            VALUES ('%s')" % \
-          ('')
+    sql = " INSERT INTO pages(page_link, page_title, page_full_content) \
+            VALUES ('%s','%s','%s')" % \
+            (page_link,page_title,page_full_content)
     try:
         cursor.execute(sql)  # Execute the SQL command
-        db.commit()  # Commit your changes in the database
+        db.commit()          # Commit your changes in the database
     except:
-        db.rollback()  # Rollback in case there is any error
+        db.rollback()        # Rollback in case there is any error
 
-    db.close()  # Close Db connection
+    db.close()               # Close Db connection
 
 startDataProcessor()
 
