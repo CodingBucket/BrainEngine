@@ -70,11 +70,15 @@ def saveContentLinksInDb(link_id,content_links):
     db.close()                    # Close Db connection
 
 # Return all text from the page content
-def processPageContent(html):
+def processPageContent(page_html):
 
-    soup = BeautifulSoup(html,"html.parser") # create a new bs4 object from the html data loaded
-    for script in soup(["script", "style"]): # remove all javascript and stylesheet code
-        script.extract()
+    page_content = {}
+
+    page_html_soup = createBeautifulSoupObject(page_html)
+
+    soup = removeAllScriptsFromPageContent(page_html_soup)
+
+    page_content['page_title'] = getPageTitle()  # Get page title from the page title.
 
     # get all text
     text = soup.get_text()
@@ -91,14 +95,9 @@ def processPageContent(html):
     # Make all string lowercase
     all_text = all_text.lower()
 
-    # Replace all \n with space
-    all_text = all_text.replace('\n', ' ')
-
-    # Replace all dot
-    all_text = all_text.replace('.', '')
-
     # Make array from page content string
     all_text = all_text.split(' ')
+    print("\n".join(all_text))
 
     # Get all words that need to remove
     remove_word = RemoveWords.getRemoveWord()
@@ -112,13 +111,31 @@ def processPageContent(html):
                     if d not in remove_word:  # IF doc is not a removed word.
                         only_str.append(d)    # Then make the clean doc array.
 
-
-    #print(all_text1)
     print ("\n".join(only_str))
 
+# Return page title
+def getPageTitle(soup):
+    page_title = soup.title.string
+    return page_title
 
+'''
+@Task: Create BeautifulSoup object of page content.
+@Param: Page html content.
+@Return: BeautifulSoup object.
+'''
+def createBeautifulSoupObject(page_html):
+    page_html_soup = BeautifulSoup(page_html,"html.parser") # create a new bs4 object from the html data loaded
+    return page_html_soup
 
-
+'''
+@Task: Remove all style and scripts from page content.
+@Param: BeautifulSoup object of page html.
+@Return: Page content after removing scripts and styles.
+'''
+def removeAllScriptsFromPageContent(page_html_soup):
+    for script in page_html_soup(["script", "style"]): # remove all javascript and stylesheet code
+        script.extract()
+    return page_html_soup
 
 startDataProcessor()
 
