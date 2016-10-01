@@ -21,7 +21,7 @@ def startDataProcessor():
 
     #saveContentLinksInDb(link_id,content_links)
 
-    all_text = processPageContent(page_content)
+    all_text = processPageContent(url,page_content)
 
 # Get all page content from the Repo
 def getPageContentFromRepo():
@@ -70,7 +70,7 @@ def saveContentLinksInDb(link_id,content_links):
     db.close()                    # Close Db connection
 
 # Return all text from the page content
-def processPageContent(page_html):
+def processPageContent(url, page_html):
 
     page_content = {}
 
@@ -80,27 +80,19 @@ def processPageContent(page_html):
 
     page_content['page_title'] = getPageTitle()  # Get page title from the page title.
 
-    # get all text
-    text = soup.get_text()
+    text = soup.get_text()  # get all text
 
-    # break into lines and remove leading and trailing space on each
-    lines = (line.strip() for line in text.splitlines())
+    lines = (line.strip() for line in text.splitlines())  # break into lines and remove leading and trailing space on each
 
-    # break multi-headlines into a line each
-    chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
+    chunks = (phrase.strip() for line in lines for phrase in line.split("  "))  # break multi-headlines into a line each
 
-    # drop blank lines
-    all_text = '\n'.join(chunk for chunk in chunks if chunk)
+    all_text = '\n'.join(chunk for chunk in chunks if chunk)   # drop blank lines
 
-    # Make all string lowercase
-    all_text = all_text.lower()
+    all_text = all_text.lower()  # Make all string lowercase
 
-    # Make array from page content string
-    all_text = all_text.split(' ')
-    print("\n".join(all_text))
+    all_text = all_text.split(' ')  # Make array from page content string
 
-    # Get all words that need to remove
-    remove_word = RemoveWords.getRemoveWord()
+    remove_word = RemoveWords.getRemoveWord()  # Get all words that need to remove
 
     only_str = []
 
@@ -113,25 +105,17 @@ def processPageContent(page_html):
 
     print ("\n".join(only_str))
 
-# Return page title
+''' @Task: Return page title from page html soup obj. '''
 def getPageTitle(soup):
     page_title = soup.title.string
     return page_title
 
-'''
-@Task: Create BeautifulSoup object of page content.
-@Param: Page html content.
-@Return: BeautifulSoup object.
-'''
+''' @Task: Create BeautifulSoup object From page content and Return BeautifulSoup object. '''
 def createBeautifulSoupObject(page_html):
     page_html_soup = BeautifulSoup(page_html,"html.parser") # create a new bs4 object from the html data loaded
     return page_html_soup
 
-'''
-@Task: Remove all style and scripts from page content.
-@Param: BeautifulSoup object of page html.
-@Return: Page content after removing scripts and styles.
-'''
+''' @Task: Remove all style and scripts From page content and Return it. '''
 def removeAllScriptsFromPageContent(page_html_soup):
     for script in page_html_soup(["script", "style"]): # remove all javascript and stylesheet code
         script.extract()
