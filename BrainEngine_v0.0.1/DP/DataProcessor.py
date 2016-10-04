@@ -1,5 +1,6 @@
 # DataProcessor Engine
 import DP.RemoveWords as RemoveWords
+import DP.DataProcessorModel as DPModel
 
 from bs4 import BeautifulSoup
 import pymysql
@@ -157,37 +158,11 @@ def savePageDocContent(page_link,page_content):
 
     page_full_content = page_content['page_full_content']
     for page_doc in page_full_content:
-        if page_doc:                       # IF page_doc is not empty
-            getPageDoc(page_doc)           # Get page_doc form the page_docs table
+        if page_doc:                               # IF page_doc is not empty
+            DPModel.getPageDoc(page_doc)           # Get page_doc form the page_docs table
 
-    db = pymysql.connect(db_host, db_username, db_pass, db_name)  # Start Db connection
 
-    cursor = db.cursor()
-    sql = " INSERT INTO pages(page_link) \
-                VALUES ('%s')" % \
-          (page_link)
-    try:
-        cursor.execute(sql)  # Execute the SQL command
-        db.commit()  # Commit your changes in the database
-    except:
-        db.rollback()  # Rollback in case there is any error
 
-    db.close()  # Close Db connection
-
-def getPageDoc(page_doc):
-    db = pymysql.connect(db_host, db_username, db_pass, db_name)  # Start Db connection
-
-    cursor = db.cursor()
-    sql = " INSERT INTO pages(page_link) \
-                    VALUES ('%s')" % \
-          (page_link)
-    try:
-        cursor.execute(sql)  # Execute the SQL command
-        db.commit()  # Commit your changes in the database
-    except:
-        db.rollback()  # Rollback in case there is any error
-
-    db.close()  # Close Db connection
 
 
 startDataProcessor()
