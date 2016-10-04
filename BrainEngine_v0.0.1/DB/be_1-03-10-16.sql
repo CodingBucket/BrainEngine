@@ -35,7 +35,7 @@ CREATE TABLE `pages` (
 
 CREATE TABLE `page_docs` (
   `page_doc_id` int(11) NOT NULL,
-  `doc` text NOT NULL,
+  `doc_index` text NOT NULL,
   `page_doc_count` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
 

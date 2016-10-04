@@ -16,15 +16,12 @@ def db_query(sql, query_type):
     cursor = db.cursor()
     try:
         cursor.execute(sql)                    # Execute the SQL command.
-
         if query_type is 'select':             # IF query_type is select Then get all data.
             results = cursor.fetchall()        # Fetch all the rows in a list of lists.
-            print(sql)
-            print(results)
-            sys.exit()
         else:                                  # IF query_type is not select.
             db.commit()                        # Commit your changes in the database.
     except:
+        print("Error: unable to fecth data")
         db.rollback()                          # Rollback in case there is any error.
 
     db.close()                                 # Close Db connection.
@@ -34,12 +31,10 @@ def db_query(sql, query_type):
 
 # Get page doc from page_docs Table
 def getPageDoc(page_doc):
-    page_doc = 'hasan'
     sql = " SELECT * FROM page_docs \
-            WHERE page_doc == '%s' " % (page_doc)
+            WHERE doc_index = '%s' " % (page_doc)
     query_type = 'select'
-    print(sql)
-    sys.exit()
-    db_query(sql,query_type)
+    result = db_query(sql,query_type)
+    return result
 
 
