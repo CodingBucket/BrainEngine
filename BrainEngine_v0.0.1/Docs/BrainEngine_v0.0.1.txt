@@ -28,7 +28,7 @@ Version StartDate   : 24.09.2016
         a. Get page link, title, full_content [30.09.16]
 
     2. Save page content in pages Table. [30.09.16]
-    3. Save page doc in page_doc Table.
+    3. Save page doc in page_docs Table.
 
 ------------------------------------------------------------------------------------------------------------------------
 

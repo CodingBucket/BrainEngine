@@ -30,6 +30,8 @@ def startDataProcessor():
 
    savePageContent(page_link,page_content)
 
+   savePageDocContent(page_link,page_content)
+
 ''' @Task: Get all page content from the Repo '''
 def getPageContentFromRepo():
   fr = open('1.html', 'r')
@@ -147,6 +149,23 @@ def savePageContent(page_link,page_content):
         db.rollback()        # Rollback in case there is any error
 
     db.close()               # Close Db connection
+
+''' @Task: Save page doc in the page_docs Table '''
+def savePageDocContent(page_link,page_content):
+
+    db = pymysql.connect(db_host, db_username, db_pass, db_name)  # Start Db connection
+
+    cursor = db.cursor()
+    sql = " INSERT INTO pages(page_link) \
+                VALUES ('%s')" % \
+          (page_link)
+    try:
+        cursor.execute(sql)  # Execute the SQL command
+        db.commit()  # Commit your changes in the database
+    except:
+        db.rollback()  # Rollback in case there is any error
+
+    db.close()  # Close Db connection
 
 startDataProcessor()
 
