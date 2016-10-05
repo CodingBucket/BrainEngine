@@ -160,8 +160,9 @@ def savePageDocContent(page_link,page_content):
             page_doc = DPModel.getPageDoc(page_doc)    # Get page_doc form the page_docs table
             if page_doc:                               # IF doc exist Then update doc
                 print('update doc')
-            else:                                      # IF doc does not exit Then insert doc
+            else:                                      # IF doc does not exist Then insert doc
                 print('insert doc')
+                
 
 
 startDataProcessor()
