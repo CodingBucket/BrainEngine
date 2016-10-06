@@ -174,6 +174,10 @@ def savePageDocContent(page_id,page_content):
                 # IF page_id exist for the doc Then update page_id for doc
                 if str(page_id) in page_doc_count_dic:      # IF key exist in the dictionary
                     print('page_id exist')
+                    # Increase page_doc_count
+                    page_doc_count_dic[str(page_id)] = page_doc_count_dic[str(page_id)] + 1
+                    print(page_doc_count_dic)
+                    # Update page_doc_count in DB
                 else:
                     print('page_id does not exist')
 
@@ -183,6 +187,8 @@ def savePageDocContent(page_id,page_content):
                 page_doc_count = 1
                 doc_page_ids = {}
                 doc_page_ids[page_id] = page_doc_count
+
+                # Data save patter {'2': 3, '1': 2}
                 DPModel.insertPageDocIndex(page_doc,doc_page_ids)
 
 startDataProcessor()
