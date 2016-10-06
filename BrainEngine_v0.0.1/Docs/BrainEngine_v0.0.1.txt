@@ -39,6 +39,7 @@ Version StartDate   : 24.09.2016
   2. pages Table : page_id(PK.int), page_link(TEXT), page_title(TEXT), page_keyword(TEXT), page_description(TEXT),
                    page_full_content(LONGTEXT), num_of_links(INT)
 
-  3. page_docs Table : page_doc_id(PK.INK), doc_index(TEXT), page_doc_count(LONGTEXT) {1:2,2:3,3:6} [page_id:doc_count]
+  3. page_docs Table : page_doc_id(PK.INK), doc_index(TEXT), page_doc_count(LONGTEXT)
+                       {'1':2,'2':3,'3':6} ['page_id':page_doc_count]
 
 ------------------------------------------------------------------------------------------------------------------------

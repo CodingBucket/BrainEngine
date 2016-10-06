@@ -169,6 +169,7 @@ def savePageDocContent(page_id,page_content):
 
                 # String to dictionary convert
                 page_doc_count_dic = ast.literal_eval(page_doc_count)
+                print(page_doc_count_dic)
 
                 # IF page_id exist for the doc Then update page_id for doc
                 if str(page_id) in page_doc_count_dic:      # IF key exist in the dictionary
