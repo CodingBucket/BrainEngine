@@ -21,7 +21,7 @@ def db_query(sql, query_type):
         else:                                  # IF query_type is not select.
             db.commit()                        # Commit your changes in the database.
     except:
-        print("Error: unable to fecth data")
+        print("Error: error in query execution")
         db.rollback()                          # Rollback in case there is any error.
 
     db.close()                                 # Close Db connection.
@@ -34,6 +34,14 @@ def getPageDoc(page_doc):
     sql = " SELECT * FROM page_docs \
             WHERE doc_index = '%s' " % (page_doc)
     query_type = 'select'
+    result = db_query(sql,query_type)
+    return result
+
+def insertPageDocIndex(page_doc,doc_page_ids):
+    sql = "INSERT INTO page_docs(doc_index,page_doc_count) \
+           VALUES ('%s','%s')" % \
+           (page_doc,doc_page_ids)
+    query_type = 'insert'
     result = db_query(sql,query_type)
     return result
 
