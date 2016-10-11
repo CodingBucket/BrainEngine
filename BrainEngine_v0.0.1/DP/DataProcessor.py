@@ -161,7 +161,9 @@ def savePageDocContent(page_id,page_content):
     for page_doc in page_full_content:
         if page_doc:                                   # IF page_doc is not empty
             page_doc = DPModel.getPageDoc(page_doc)    # Get page_doc form the page_docs table
-            if page_doc:                               # IF doc exist Then update doc
+
+            # IF doc exist Then update doc
+            if page_doc:
                 print('update doc')
 
                 page_id = 1
@@ -182,7 +184,9 @@ def savePageDocContent(page_id,page_content):
                     print('page_id does not exist')
 
                 sys.exit()
-            else:                                      # IF doc does not exist Then insert doc
+
+            # IF doc does not exist Then insert doc
+            else:
                 print('insert doc')
                 page_doc_count = 1
                 doc_page_ids = {}
