@@ -37,6 +37,7 @@ def getPageDoc(page_doc):
     result = db_query(sql,query_type)
     return result
 
+# Insert page doc in page_docs Table
 def insertPageDocIndex(page_doc,doc_page_ids):
     sql = "INSERT INTO page_docs(doc_index,page_doc_count) \
            VALUES ('%s','%s')" % \
