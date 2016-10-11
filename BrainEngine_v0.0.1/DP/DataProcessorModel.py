@@ -46,4 +46,12 @@ def insertPageDocIndex(page_doc,doc_page_ids):
     result = db_query(sql,query_type)
     return result
 
-
+# Update page doc in page_docs Table
+def updatePageDocIndex(doc, page_doc_count_dic):
+    sql = "UPDATE page_docs SET page_doc_count = /"'%s'/" WHERE doc_index = '%s'" % \
+          (page_doc_count_dic,doc)
+    print(sql)
+    sys.exit()
+    query_type = 'update'
+    result = db_query(sql,query_type)
+    return result

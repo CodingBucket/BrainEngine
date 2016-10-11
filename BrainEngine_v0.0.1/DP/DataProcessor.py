@@ -165,7 +165,7 @@ def savePageDocContent(page_id,page_content):
             # IF doc exist Then update doc
             if page_doc:
                 page_id = 1
-                page_doc = page_doc[0][1]
+                doc = page_doc[0][1]
                 page_doc_count = page_doc[0][2]
 
                 # String to dictionary convert
@@ -174,12 +174,15 @@ def savePageDocContent(page_id,page_content):
 
                 # IF page_id exist for the doc Then update page_id for doc
                 if str(page_id) in page_doc_count_dic:      # IF key exist in the dictionary
+
                     print('page_id exist')
+
                     # Increase page_doc_count
                     page_doc_count_dic[str(page_id)] = page_doc_count_dic[str(page_id)] + 1
-                    print(page_doc_count_dic)
+
                     # Update page_doc_count in DB
-                    DPModel.updatePageDoc(page_doc, page_doc_count_dic)
+                    DPModel.updatePageDocIndex(doc, page_doc_count_dic)
+
                 else:
                     print('page_id does not exist')
 
