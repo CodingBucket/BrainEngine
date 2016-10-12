@@ -164,39 +164,39 @@ def savePageDocContent(page_id,page_content):
 
             # IF doc exist Then update doc
             if page_doc:
-                page_id = 1
+                page_id = 3
                 doc = page_doc[0][1]
                 page_doc_count = page_doc[0][2]
 
                 # String to dictionary convert
                 page_doc_count_dic = ast.literal_eval(page_doc_count)
-                print(page_doc_count_dic)
 
                 # IF page_id exist for the doc Then update page_id for doc
                 if str(page_id) in page_doc_count_dic:      # IF key exist in the dictionary
 
-                    print('page_id exist')
-
                     # Increase page_doc_count
                     page_doc_count_dic[str(page_id)] = page_doc_count_dic[str(page_id)] + 1
 
-                    # Update page_doc_count in DB
-                    DPModel.updatePageDocIndex(doc, page_doc_count_dic)
-
+                # IF page_id does not exist for the doc Then insert page_id for doc
                 else:
-                    print('page_id does not exist')
+
+                    # Adding page_id and doc_count in the page_doc_count_dic dictionary
+                    page_doc_count_dic[str(page_id)] = 1
+
+                # Update page_doc_count in DB
+                DPModel.updatePageDocIndex(doc, page_doc_count_dic)
 
                 sys.exit()
 
             # IF doc does not exist Then insert doc
             else:
                 print('insert doc')
-                page_doc_count = 1
-                doc_page_ids = {}
-                doc_page_ids[page_id] = page_doc_count
+                page_doc_count = 1                  # First doc count
+                page_doc_count_dic = {}             # New page_doc_count dictionary
+                page_doc_count_dic[str(page_id)] = page_doc_count
 
                 # Data save patter {'2': 3, '1': 2}
-                DPModel.insertPageDocIndex(page_doc,doc_page_ids)
+                DPModel.insertPageDocIndex(page_doc,page_doc_count_dic)
 
 startDataProcessor()
 

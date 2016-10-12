@@ -38,20 +38,19 @@ def getPageDoc(page_doc):
     return result
 
 # Insert page doc in page_docs Table
-def insertPageDocIndex(page_doc,doc_page_ids):
+def insertPageDocIndex(page_doc,page_doc_count_dic):
     sql = "INSERT INTO page_docs(doc_index,page_doc_count) \
            VALUES ('%s','%s')" % \
-           (page_doc,doc_page_ids)
+           (page_doc,page_doc_count_dic)
     query_type = 'insert'
     result = db_query(sql,query_type)
     return result
 
 # Update page doc in page_docs Table
 def updatePageDocIndex(doc, page_doc_count_dic):
-    sql = "UPDATE page_docs SET page_doc_count = /"'%s'/" WHERE doc_index = '%s'" % \
-          (page_doc_count_dic,doc)
-    print(sql)
-    sys.exit()
+
+    sql = 'UPDATE page_docs SET page_doc_count = "%s" WHERE doc_index = "%s" ' % ( page_doc_count_dic, doc )
+
     query_type = 'update'
     result = db_query(sql,query_type)
     return result
