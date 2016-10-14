@@ -29,8 +29,8 @@ def db_query(sql, query_type):
     if query_type is 'select':
         return results
 
-# Get page doc from page_docs Table
-def getPageDoc(page_doc):
+# Get data
+def getData(page_doc):
     sql = " SELECT * FROM page_docs \
             WHERE doc_index = '%s' " % (page_doc)
     query_type = 'select'
