@@ -158,15 +158,15 @@ def savePageDocContent(page_id,page_content):
 
     page_full_content = page_content['page_full_content']
 
-    for page_doc in page_full_content:
-        if page_doc:                                   # IF page_doc is not empty
-            page_doc = DPModel.getPageDoc(page_doc)    # Get page_doc form the page_docs table
+    for page_doc in page_full_content:                     # Itarate the full doc array
+        if page_doc:                                       # IF page_doc is not empty
+            page_doc_row = DPModel.getPageDoc(page_doc)    # Get page_doc form the page_docs table
 
-            # IF doc exist Then update doc
-            if page_doc:
-                page_id = 3
-                doc = page_doc[0][1]
-                page_doc_count = page_doc[0][2]
+            # IF doc exist in page_docs Table Then update doc
+            if page_doc_row:
+                print('update doc')
+                doc = page_doc_row[0][1]
+                page_doc_count = page_doc_row[0][2]
 
                 # String to dictionary convert
                 page_doc_count_dic = ast.literal_eval(page_doc_count)
@@ -186,17 +186,22 @@ def savePageDocContent(page_id,page_content):
                 # Update page_doc_count in DB
                 DPModel.updatePageDocIndex(doc, page_doc_count_dic)
 
-                sys.exit()
-
-            # IF doc does not exist Then insert doc
+            # IF doc does not exist in page_docs Table Then insert doc
             else:
-                print('insert doc')
-                page_doc_count = 1                  # First doc count
-                page_doc_count_dic = {}             # New page_doc_count dictionary
-                page_doc_count_dic[str(page_id)] = page_doc_count
+                # IF page_doc is not empty
+                if page_doc:
+                    print('insert doc')
+                    page_doc_count = 1                  # First doc count
+                    page_doc_count_dic = {}             # New page_doc_count dictionary
 
-                # Data save patter {'2': 3, '1': 2}
-                DPModel.insertPageDocIndex(page_doc,page_doc_count_dic)
+                    # Adding page_id and doc_count in the page_doc_count_dic dictionary
+                    page_doc_count_dic[str(page_id)] = page_doc_count
+
+                    # Data save pattern {'2': 3} {'page_id': doc_count}
+                    # Insert page doc in page_doc Table
+                    DPModel.insertPageDocIndex(page_doc,page_doc_count_dic)
+
+            sys.exit()
 
 startDataProcessor()
 
