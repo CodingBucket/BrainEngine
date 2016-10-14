@@ -8,27 +8,20 @@ Version StartDate   : 24.09.2016
 ------------------------------------------------------------------------------------------------------------------------
 
 # WebCrawler Engine :
-    1. Get all web page content. [Done]
-    2. Save all web page content in Repo. [Done]
+    1. Get all web page content.
+    2. Save all web page content in Repo.
 
 ------------------------------------------------------------------------------------------------------------------------
 
 # DataProcessor Engine :
-    1. Get all page content from Repo.[Done]
-    2. Get all links from page content. [Done]
-    3. Clean links [Done]
-    4. Save all links in links table.[Done]
+    1. Get all page content from Repo.
+    2. Get all links from page content.
+    3. Clean links
+    4. Save all links in links table.
 
     1. Process page data.
-        a. Remove all number [30.09.16]
-        b. Remove 1 length string [30.09.16]
-        c. Remove remove_words [30.09.16]
-        d. Remove non alfanumeric string [30.09.16]
-
-        a. Get page link, title, full_content [30.09.16]
-
-    2. Save page content in pages Table [30.09.16]
-    3. DataProcessorModel add [03.10.16]
+    2. Save page content in pages Table
+    3. DataProcessorModel add
     4. Save page doc in page_docs Table.
 
 ------------------------------------------------------------------------------------------------------------------------

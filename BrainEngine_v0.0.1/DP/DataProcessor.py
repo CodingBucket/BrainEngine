@@ -201,8 +201,6 @@ def savePageDocContent(page_id,page_content):
                     # Insert page doc in page_doc Table
                     DPModel.insertPageDocIndex(page_doc,page_doc_count_dic)
 
-            sys.exit()
-
 startDataProcessor()
 
 
