@@ -1,6 +1,6 @@
 # @Processor: SearchAlgorithom
 # @Version  : 0.0.1
-# @Author   : HAK
+# @Author   : hak
 
 import pprint
 
