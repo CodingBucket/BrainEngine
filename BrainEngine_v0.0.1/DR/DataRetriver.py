@@ -4,6 +4,7 @@
 import DR.SA.SearchAlgorithom as SA
 
 def startDataRetriver():
-    SA.getData()
+    search_query = 'stack'
+    SA.getData(search_query)
 
 startDataRetriver()

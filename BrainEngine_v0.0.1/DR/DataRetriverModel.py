@@ -30,11 +30,12 @@ def db_query(sql, query_type):
     if query_type is 'select':
         return results
 
-# Get data
-def getData(page_doc):
-    sql = " SELECT * FROM page_docs \
-            WHERE doc_index = '%s' " % (page_doc)
+# Get data from pages Table
+def getTitle(search_query):
+    sql = " SELECT page_link, page_title FROM pages WHERE page_title LIKE '%s' " % ("%"+search_query+"%")
     query_type = 'select'
     result = db_query(sql,query_type)
     return result
+
+
 
