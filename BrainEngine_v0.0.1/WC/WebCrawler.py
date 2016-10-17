@@ -1,4 +1,6 @@
-# WebCrawler Engine
+# @Processor : WebCrawler Engine
+# @Author    : HAK
+
 import requests
 
 # Starting point of the web crawler

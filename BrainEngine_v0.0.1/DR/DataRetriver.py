@@ -1,12 +1,9 @@
-# DataRetriver Engine
+# @Processor : DataRetriver Engine
+# @Author    : HAK
 
-import DR.DataRetriverModel as DRModel
 import DR.SA.SearchAlgorithom as SA
 
 def startDataRetriver():
-    DRModel.getData()
-
-def getData():
-    print('in DR')
+    SA.getData()
 
 startDataRetriver()

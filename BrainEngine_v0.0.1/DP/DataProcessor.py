@@ -1,4 +1,6 @@
-# DataProcessor Engine
+# @Processor : DataProcessor Engine
+# @Author    : HAK
+
 from bs4 import BeautifulSoup
 import pymysql
 import sys

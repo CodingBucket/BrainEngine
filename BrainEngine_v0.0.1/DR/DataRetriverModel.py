@@ -1,4 +1,5 @@
-# DataRetriverModel
+# @Model   : DataRetriverModel
+# @Author  : HAK
 
 import pymysql
 import sys
