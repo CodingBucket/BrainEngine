@@ -22,17 +22,24 @@ def getData():
     # Assign page doc count in variable
     page_doc_count_string = doc[0][2]
 
-    # String to dictionary convertion
+    # String to dictionary conversion
     page_doc_count_dic = ast.literal_eval(page_doc_count_string)
     pprint.pprint(page_doc_count_dic)
     print('-----------------')
 
-    page_info_with_doc_count = []                    # Initialize a tuple
-    for page_info in page_title:                     # Loop page info
+    page_info_with_doc_count = []                 # Initialize a tuple
+    for page_info in page_title:                  # Loop page info
         page_id = page_info[0]
-        # Append page and doc_count in page_info_with_doc_count tuple
-        page_info_with_doc_count = page_info + (page_doc_count_dic[str(page_id)],)
-        print(page_info_with_doc_count)
+
+        # Append doc_count in page_info tuple
+        page_info = page_info + (page_doc_count_dic[str(page_id)],)
+
+        # Append page_info in page_info_with_doc_count
+        page_info_with_doc_count.append(page_info)
+
+    pprint.pprint(page_info_with_doc_count)
     print('-----------------')
+
+    # page_info_with_doc_count sort by doc_count
 
 getData()
