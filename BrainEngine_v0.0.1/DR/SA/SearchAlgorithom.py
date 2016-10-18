@@ -15,5 +15,6 @@ def getData():
     pprint.pprint(page_title)
 
     # Doc count based filter
+    doc = DPModel.getDoc(search_query)
 
 getData()

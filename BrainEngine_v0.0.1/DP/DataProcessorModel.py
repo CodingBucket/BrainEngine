@@ -1,5 +1,5 @@
 # @Model  : DataProcessorModel
-# @Author : HAK
+# @Author : hak
 
 import pymysql
 import sys

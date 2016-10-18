@@ -1,5 +1,5 @@
 # @Processor : DataRetriver Engine
-# @Author    : HAK
+# @Author    : hak
 
 import DR.SA.SearchAlgorithom as SA
 
