@@ -3,6 +3,7 @@
 # @Author   : hak
 
 import pprint
+import ast
 
 import DR.DataRetriverModel as DPModel
 
@@ -18,6 +19,14 @@ def getData():
     # Doc count based filter
     doc = DPModel.getDoc(search_query)
     pprint.pprint(doc)
+    pprint.pprint(doc[0][2])
+
+    page_doc_count_string = doc[0][2]
+
+    # String to dictionary convert
+    page_doc_count_dic = ast.literal_eval(page_doc_count_string)
+    pprint.pprint(page_doc_count_dic['1'])
+
     print('-----------------')
 
     # Append page_doc_count in page_title tuple
