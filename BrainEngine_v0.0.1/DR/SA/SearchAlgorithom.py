@@ -41,5 +41,6 @@ def getData():
     print('-----------------')
 
     # page_info_with_doc_count sort by doc_count
+    print(type(page_info_with_doc_count))
 
 getData()
