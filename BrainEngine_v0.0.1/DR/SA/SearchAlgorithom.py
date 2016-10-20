@@ -4,6 +4,7 @@
 
 import pprint
 import ast
+from operator import itemgetter
 
 import DR.DataRetriverModel as DPModel
 
@@ -41,6 +42,7 @@ def getData():
     print('-----------------')
 
     # page_info_with_doc_count sort by doc_count
-    print(type(page_info_with_doc_count))
+    page_info_with_doc_count.sort(key=itemgetter(3), reverse=True)
+    pprint.pprint(page_info_with_doc_count)
 
 getData()
