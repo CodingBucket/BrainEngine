@@ -4,20 +4,15 @@
 
 import pymysql
 
-import DB.db_config as db_config
-
-
-
-''' DataBase Variables '''
-db_host = 'localhost'
-db_username = 'root'
-db_pass = ''
-db_name = 'be_1'
+import DB.db_config as DB_Config
 
 # Execute query in database
 def db_query(sql, query_type):
+
+    db_config = DB_Config.getDbConfig()
+
     results = 0
-    db = pymysql.connect(db_host, db_username, db_pass, db_name)  # Start Db connection
+    db = pymysql.connect(db_config['host'], db_config['username'], db_config['password'], db_config['db_name'])  # Start Db connection
     cursor = db.cursor()
     try:
         cursor.execute(sql)                    # Execute the SQL command.
@@ -33,5 +28,3 @@ def db_query(sql, query_type):
 
     if query_type is 'select':
         return results
-
-

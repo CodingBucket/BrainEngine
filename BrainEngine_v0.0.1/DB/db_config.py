@@ -2,7 +2,7 @@
 # @Created : 10.19.2016
 
 def getDbConfig():
-    db_config = []
+    db_config = {}
     db_config['host'] = 'localhost'
     db_config['username'] = 'root'
     db_config['password'] = ''
