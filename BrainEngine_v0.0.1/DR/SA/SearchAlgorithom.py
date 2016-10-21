@@ -6,19 +6,19 @@ import pprint
 import ast
 from operator import itemgetter
 
-import DR.DataRetriverModel as DPModel
+import DR.DataRetriverModel as DRModel
 
 def getData():
 
     search_query = 'stack'                           # For testing
 
     # Get page info from pages Table
-    page_title = DPModel.getTitle(search_query)      # Title based filter
+    page_title = DRModel.getTitle(search_query)      # Title based filter
     pprint.pprint(page_title)
     print('-----------------')
 
     # Get doc from page_docs Table
-    doc = DPModel.getDoc(search_query)               # Doc count based filter
+    doc = DRModel.getDoc(search_query)               # Doc count based filter
 
     # Assign page doc count in variable
     page_doc_count_string = doc[0][2]

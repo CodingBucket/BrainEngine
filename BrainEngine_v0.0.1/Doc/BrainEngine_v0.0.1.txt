@@ -21,8 +21,14 @@ Version StartDate   : 24.09.2016
 
     1. Process page data.
     2. Save page content in pages Table
-    3. DataProcessorModel add
-    4. Save page doc in page_docs Table.
+    3. Save page doc in page_docs Table.
+
+------------------------------------------------------------------------------------------------------------------------
+
+# DataRetirver Engine:
+    1. Get data from DB.
+    2. Title based filter.
+    3. Doc count based filter.
 
 ------------------------------------------------------------------------------------------------------------------------
 
