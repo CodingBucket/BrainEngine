@@ -1,7 +1,7 @@
 BrainEngine_v0.0.1
 Project Name        : BrainEngine
 Project Version     : 0.0.1
-Programming Language: Python v3.5
+Programming Language: Python v3.5.2
 Project StartDate   : 24.09.2016
 Version StartDate   : 24.09.2016
 Version CloseDate   : 04.11.2016

@@ -1,3 +1,6 @@
-from django.shortcuts import render
+from django.http import HttpResponse
+from .models import Links
 
-# Create your views here.
+def index(request):
+    all_albums = Links.objects.all()
+    return HttpResponse(all_albums)
