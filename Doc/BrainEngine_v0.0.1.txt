@@ -4,6 +4,7 @@ Project Version     : 0.0.1
 Programming Language: Python v3.5
 Project StartDate   : 24.09.2016
 Version StartDate   : 24.09.2016
+Version CloseDate   : 04.11.2016
 
 ------------------------------------------------------------------------------------------------------------------------
 
