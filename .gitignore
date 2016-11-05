@@ -1,5 +1,6 @@
 # BrainEngine
-BE_BACK
+db.sqlite3
+BrainEngine_Backups
 PyCode/*.py
 WorkLog
 __pycache__
